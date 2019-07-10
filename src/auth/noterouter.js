@@ -22,5 +22,20 @@ noteRouter.post('/save/:username', (req, res, next) => {
     })
 });
 
+noteRouter.get('/retrieve/:username', (req, res, next) => {
+  User.find({username:`${req.params.username}`})
+    .populate('notes')
+    //.exec acts like a promise.
+    .then(data => {
+      res.status(200).json(data[0].notes);
+      return data[0].notes;
+      })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({error: err});
+    });
+
+});
+
 /** Exports noteRouter for use outside of this file.*/
 module.exports = noteRouter;
