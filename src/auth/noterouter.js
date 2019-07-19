@@ -22,20 +22,16 @@ noteRouter.get('/retrieve/:username', (req, res, next) => {
       res.status(500).json({error: err});
     });
 });
+
 /** deletes job posting from a specific user*/
 noteRouter.delete('/delete/:username', (req, res, next) => {
-  User.find({username:`${req.params.username}`})
-    .populate('notes')
-    .then(data => {
-      console.log(data[0].notes[0]._id);
-      console.log(req.body.id);
-      let results = data[0].notes.filter(job => job._id !== req.body.id);
-      console.log(results);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({error: err});
-    })
+    Notes.findByIdAndDelete(req.body.id);
+
+    User.find({username:`${req.params.username}`}).notes.findByIdAndDelete(req.body.id);
+    // .catch(err => {
+    //   console.log(err);
+    //   res.status(500).json({error: err});
+    // })
 });
 
 /** saves the note to the job for later reference*/
