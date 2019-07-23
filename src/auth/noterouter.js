@@ -24,7 +24,7 @@ noteRouter.get('/retrieve/:username', (req, res, next) => {
 /** deletes job posting from a specific user*/
 noteRouter.delete('/delete/:username', (req, res, next) => {
 
-  User.updateOne(
+  User.populate('notes').updateOne(
     {'username': `${req.params.username}`},
     {$pull: {'notes': `${req.body.id}`}})
     .then(() => {
