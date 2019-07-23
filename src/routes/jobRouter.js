@@ -1,15 +1,17 @@
 'use strict';
 
-/** NODE PACKAGES
- * Express
+/** NODE PACKAGES & DEPENDENCIES
+ * express
+ * Job
+ * User
  */
 const express = require('express');
-const noteRouter = express.Router();
-const Notes = require('../userDBSchema/noteSchema');
+const jobRouter = express.Router();
+const Job = require('../userDBSchema/jobs-model');
 const User = require('../userDBSchema/users-model');
 
 /** retrieves data for a username*/
-noteRouter.get('/retrieve/:username', (req, res, next) => {
+jobRouter.get('/retrieve/:username', (req, res, next) => {
   User.find({username:`${req.params.username}`})
     .populate('notes')
     .then(data => {
@@ -22,13 +24,13 @@ noteRouter.get('/retrieve/:username', (req, res, next) => {
 });
 
 /** deletes job posting from a specific user*/
-noteRouter.delete('/delete/:username', (req, res, next) => {
+jobRouter.delete('/delete/:username', (req, res, next) => {
 
   User.populate('notes').updateOne(
     {'username': `${req.params.username}`},
     {$pull: {'notes': `${req.body.id}`}})
     .then(() => {
-      Notes.findByIdAndDelete(req.body.id)
+      Job.findByIdAndDelete(req.body.id)
     })
     .catch(err => {
       console.log(err);
@@ -37,8 +39,8 @@ noteRouter.delete('/delete/:username', (req, res, next) => {
 });
 
 /** saves the note to the job for later reference*/
-noteRouter.post('/save/:username', (req, res, next) => {
-  let note = new Notes(req.body);
+jobRouter.post('/save/:username', (req, res, next) => {
+  let note = new Job(req.body);
   note.save();
 
   User.find({username:`${req.params.username}`})

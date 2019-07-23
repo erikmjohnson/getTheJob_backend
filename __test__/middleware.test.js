@@ -3,7 +3,7 @@
 const server = require('../src/app.js').server;
 const supergoose = require('./supergoose');
 const jwt = require('jsonwebtoken');
-const auth = require('../src/auth/middleware.js');
+const auth = require('../src/routes/middleware.js');
 const mockRequest = supergoose.server(server);
 
 beforeAll(supergoose.startDB);
