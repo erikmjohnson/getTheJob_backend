@@ -10,8 +10,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 /** Dependency Files */
-const noteRoutes = require('./auth/noterouter');
-const authRoutes = require('./auth/router');
+const jobRoutes = require('./routes/jobrouter');
+const authRoutes = require('./routes/authRouter');
 const errorHandler = require('./middleware/error');
 const notFound = require('./middleware/404');
 
@@ -23,7 +23,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-app.use(noteRoutes);
+app.use(jobRoutes);
 app.use(authRoutes);
 app.use(notFound);
 app.use(errorHandler);

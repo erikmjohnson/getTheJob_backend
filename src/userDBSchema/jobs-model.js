@@ -16,7 +16,6 @@ const noteSchema = new mongoose.Schema({
   summary: {type:String},
   date: {type:Date, default:Date.now()},
   url: {type:String},
-  // users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 
 /** Sets our schema as a model sub-type of the document type in mongoose*/

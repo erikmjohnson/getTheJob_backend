@@ -55,7 +55,10 @@ Starting Web App
 ```
 cd YourRepo/YourProject
 npm run start
-* Separate terminal tab
+
+*** Separate terminal tab ***
+
+cd YourRepo/YourProject
 npm run dbOn
 ```
 ___
@@ -72,9 +75,9 @@ ___
 * As a developer, I can log errors so that I know of any potential bugs or edge cases.
 ___
 ### Exported Values and Methods
-* PORT=`3000`
-* MONGODB_URI=`mongodb://localhost/testdb`
-* SECRET= `<Choose your own secret>`
+* `PORT=<port number>`
+* `MONGODB_URI=<mongoDB Link>`
+* `SECRET=<Choose your own secret>`
 ___
 ### Modules
 
@@ -87,10 +90,10 @@ ___
 * `_authentication` -> checks if user exist
 * `_authError` -> outputs an error if an invalid username or password is given.
 
-#### `noterouter.js`
+#### `jobRouter.js`
 * `/save` -> saves the note to the job for later reference
 
-#### `router.js`
+#### `userRouter.js`
 * `/` -> the landing route for our web page
 * `/signup` -> Make a new profile
 * `/signin` -> Sign in to profile
@@ -104,7 +107,7 @@ ___
 #### `jobSchema.js`
 * `jobSchema` -> Creates 'savedJob' as a new mongo schema, and defines types for jobTitle, location, summary, date and url.
 
-#### `noteSchema.js`
+#### `jobs-model.js`
 * `noteSchema` -> Creates 'savedNotes' as a new mongo schema, and defines types for noteTitle, summary, and date.
 
 #### `user-model.js`
