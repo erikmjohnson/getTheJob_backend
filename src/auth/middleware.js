@@ -41,7 +41,6 @@ module.exports = (req, res, next) => {
    * @private
    */
   function _authenticate(user) {
-    console.log(user);
     if(user) {
       req.user = user;
       req.token = user.generateToken();

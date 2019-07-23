@@ -12,10 +12,8 @@ const User = require('../userDBSchema/users-model');
 noteRouter.get('/retrieve/:username', (req, res, next) => {
   User.find({username:`${req.params.username}`})
     .populate('notes')
-    //.exec acts like a promise.
     .then(data => {
       res.status(200).json(data[0].notes);
-      return data[0].notes;
     })
     .catch(err => {
       console.log(err);
@@ -25,13 +23,17 @@ noteRouter.get('/retrieve/:username', (req, res, next) => {
 
 /** deletes job posting from a specific user*/
 noteRouter.delete('/delete/:username', (req, res, next) => {
-    Notes.findByIdAndDelete(req.body.id);
 
-    User.find({username:`${req.params.username}`}).notes.findByIdAndDelete(req.body.id);
-    // .catch(err => {
-    //   console.log(err);
-    //   res.status(500).json({error: err});
-    // })
+  User.updateOne(
+    {'username': `${req.params.username}`},
+    {$pull: {'notes': `${req.body.id}`}})
+    .then(() => {
+      Notes.findByIdAndDelete(req.body.id)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({error: err});
+    })
 });
 
 /** saves the note to the job for later reference*/
@@ -40,11 +42,9 @@ noteRouter.post('/save/:username', (req, res, next) => {
   note.save();
 
   User.find({username:`${req.params.username}`})
-    .populate('notes')
-    .exec(function(err, user) {
-      if (err) console.log(err);
-      user[0].notes.push(note);
-      user[0].save();
+    .then(data => {
+      data[0].notes.push(note);
+      data[0].save();
     })
     .catch(err => {
       console.log(err);
