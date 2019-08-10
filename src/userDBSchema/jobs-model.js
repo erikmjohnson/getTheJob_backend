@@ -14,7 +14,7 @@ const noteSchema = new mongoose.Schema({
   title: {type:String},
   location: {type:String},
   summary: {type:String},
-  date: {type:Date, default:Date.now()},
+  date: {type:String},
   url: {type:String},
 });
 
