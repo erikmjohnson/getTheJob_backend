@@ -10,7 +10,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 /** Dependency Files */
-const jobRoutes = require('./routes/jobrouter');
+const jobRoutes = require('./routes/jobRouter');
 const authRoutes = require('./routes/authRouter');
 const errorHandler = require('./middleware/error');
 const notFound = require('./middleware/404');
