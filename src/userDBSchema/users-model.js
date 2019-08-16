@@ -18,7 +18,6 @@ require('dotenv').config();
  * @type {mongoose.Schema}
  */
 const userSchema = new Schema({
-  note : { type: mongoose.Schema.Types.ObjectId, ref: 'Notes' },
   username: {type:String, required:true, unique:true},
   password: {type:String, required:true},
   notes: [{ type: Schema.Types.ObjectId, ref: 'Notes' }]

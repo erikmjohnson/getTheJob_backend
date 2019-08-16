@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
  * @type {mongoose.Schema}
  */
 const noteSchema = new mongoose.Schema({
-  organization: {type: String},
+  organization: {type:String},
   title: {type:String},
   location: {type:String},
   summary: {type:String},

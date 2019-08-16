@@ -26,7 +26,7 @@ jobRouter.get('/retrieve/:username', (req, res, next) => {
 /** deletes job posting from a specific user*/
 jobRouter.delete('/delete/:username', (req, res, next) => {
 
-  User.populate('notes').updateOne(
+  User.updateOne(
     {'username': `${req.params.username}`},
     {$pull: {'notes': `${req.body.id}`}})
     .then(() => {
