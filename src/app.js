@@ -23,8 +23,8 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-app.use(authRoutes);
 app.use(jobRoutes);
+app.use(authRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
